@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+        #pagina {
+            position: absolute;
+            left: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pagina">
+        <h1>Pomodoro</h1>
+        <hr>
+        <div id="tasklist">
+
+        </div>
+        <hr>
+        Tempo estimado: <span id="tempoEstimado"></span>
+        <hr>
+        <input type="text" id="task">
+        <hr>
+        <button class="btn btn-primary" onclick="addTask()">Adcionar</button>
+    </div>
+
+    <script type="text/javascript">
+        //app
+
+        var tasks = [];
+
+        function injetaId($id, $html) {
+            window.document.getElementById($id).innerHTML = $html;
+        }
+
+        function pegaConteudo($id) {
+
+            let valor = window.document.getElementById($id).value;
+            return valor;
+        }
+
+        function addTask() {
+            let html = '<p><i class="btn btn-warning">' + pegaConteudo('task') + '</i>';
+            tasks.push(html);
+            injetaId('tasklist', tasks);
+            calculaTempo();
+
+        }
+
+        function removeTask() {
+
+        }
+
+        function calculaTempo() {
+        	let conta = tasks.length * 30;
+        	let hora = Math.trunc(conta/60);
+        	let minuto = conta % 60;
+        	let tempoEstimado = hora+":"+minuto;
+
+        	injetaId('tempoEstimado', tempoEstimado);
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
